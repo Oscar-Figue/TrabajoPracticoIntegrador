@@ -1,4 +1,8 @@
-USE [TPIntegrador]
+USE [Master]
+GO
+CREATE DATABASE [Videoclub]
+GO
+USE [Videoclub]
 GO
 /****** Object:  Table [dbo].[Clients]    Script Date: 30/12/2023 02:13:26 ******/
 SET ANSI_NULLS ON
@@ -6,7 +10,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Clients](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[NombreCompleto] [varchar](100) NOT NULL,
 	[FechaNacimiento] [datetime] NOT NULL,
  CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED 
@@ -21,7 +25,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Consoles](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](100) NOT NULL,
  CONSTRAINT [PK_Consoles] PRIMARY KEY CLUSTERED 
 (
@@ -35,7 +39,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Games](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](100) NOT NULL,
 	[ConsoleId] [int] NOT NULL,
  CONSTRAINT [PK_Games] PRIMARY KEY CLUSTERED 
@@ -50,7 +54,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Rents](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ClientId] [int] NOT NULL,
 	[GameId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
@@ -68,9 +72,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Users](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Username] [varchar](50) NOT NULL,
-	[Pass] [varchar](30) NOT NULL,
+	[Pass] [varchar](50) NOT NULL,
 	[IsAdmin] [bit] NOT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
@@ -97,8 +101,4 @@ ALTER TABLE [dbo].[Rents]  WITH CHECK ADD  CONSTRAINT [FK_Rents_Users] FOREIGN K
 REFERENCES [dbo].[Users] ([Id])
 GO
 ALTER TABLE [dbo].[Rents] CHECK CONSTRAINT [FK_Rents_Users]
-GO
-USE [master]
-GO
-ALTER DATABASE [TPIntegrador] SET  READ_WRITE 
 GO

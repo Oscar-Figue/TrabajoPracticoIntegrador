@@ -9,7 +9,7 @@ namespace Repository.Base
 {
     public class GenericRepository<T>
     {
-        private readonly string connectionString = ConfigurationHelper.GetConnectionString(); // Tu cadena de conexión a la base de datos
+        internal readonly string connectionString = ConfigurationHelper.GetConnectionString(); // Tu cadena de conexión a la base de datos
         public List<T> GetAll()
         {
             string tableName = GetTableName();
@@ -148,7 +148,7 @@ namespace Repository.Base
             throw new NotSupportedException($"Entity type {typeof(T)} not supported.");
         }
 
-        private T MapFromReader(SqlDataReader reader)
+        internal T MapFromReader(SqlDataReader reader)
         {
             var entityType = typeof(T);
             var entity = Activator.CreateInstance(entityType);
