@@ -40,11 +40,12 @@ namespace TPIntegrador.Views.Home
             lstRents.ValueMember = "Id";
             lstRents.DataSource = list;
             RefreshEndRentBtnEnabled();
+            lstRents.Refresh();
         }
 
         private void btnRents_Click(object sender, System.EventArgs e)
         {
-            var frm = new FrmRentsList(_loggedUser);
+            var frm = new FrmRents(_loggedUser);
             frm.FormClosed += (s, ev) =>
             {
                 RefreshHome();
@@ -54,7 +55,7 @@ namespace TPIntegrador.Views.Home
 
         private void btnEndRent_Click(object sender, System.EventArgs e)
         {
-            var frm = new FrmRentsList(_loggedUser);
+            var frm = new FrmRents(_loggedUser, ((RentModel)lstRents.SelectedItem));
             frm.FormClosed += (s, ev) =>
             {
                 RefreshHome();
@@ -119,6 +120,33 @@ namespace TPIntegrador.Views.Home
         private void RefreshAdministrationView()
         {
             btnConsoles.Visible = btnGames.Visible = btnUsers.Visible = _loggedUser.IsAdmin;
+        }
+
+        private void lstRents_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0 || e.Index >= lstRents.Items.Count)
+                return;
+
+            var rent = lstRents.Items[e.Index] as RentModel;
+            if (rent == null)
+                return;
+
+            e.DrawBackground();
+
+            Color textColor = SystemColors.ControlText;
+
+            // Verifica si hay una fecha de devolución y si es anterior a la fecha actual
+            if (rent.FechaDevolucion.HasValue && rent.FechaDevolucion.Value < DateTime.Now)
+            {
+                textColor = Color.Red; // Cambia el color del texto a rojo si la fecha de devolución es anterior a la fecha actual
+            }
+
+            using (SolidBrush brush = new SolidBrush(textColor))
+            {
+                e.Graphics.DrawString(lstRents.GetItemText(lstRents.Items[e.Index]), e.Font, brush, e.Bounds);
+            }
+
+            e.DrawFocusRectangle();
         }
     }
 }
