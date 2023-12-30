@@ -1,4 +1,5 @@
-﻿using Repository.Entities;
+﻿using Base.Base;
+using Repository.Entities;
 using Services.Base;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ using System.Windows.Forms;
 
 namespace TPIntegrador.Views.Users
 {
-    public partial class FrmUsersList : Form
+    public partial class FrmUsersList : FrmBase
     {
         private GenericService<UserModel, User> _service;
 
-        public FrmUsersList()
+        public FrmUsersList(UserModel loggedUser) : base(loggedUser)
         {
             _service = new GenericService<UserModel, User>();
             InitializeComponent();

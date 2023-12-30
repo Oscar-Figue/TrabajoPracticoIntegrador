@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Base.Base;
+using Repository.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +12,9 @@ using System.Windows.Forms;
 
 namespace TPIntegrador.Views
 {
-    public partial class FrmGames : Form
+    public partial class FrmGamesList : FrmBase
     {
-        public FrmGames()
+        public FrmGamesList(UserModel loggedUser) : base(loggedUser)
         {
             InitializeComponent();
         }
