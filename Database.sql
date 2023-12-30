@@ -1,12 +1,7 @@
-USE [TPIntegrador]
-GO
-/****** Object:  Table [dbo].[Clients]    Script Date: 30/12/2023 02:13:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+CREATE DATABASE [Videoclub]
+USE [Videoclub]
 CREATE TABLE [dbo].[Clients](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[NombreCompleto] [varchar](100) NOT NULL,
 	[FechaNacimiento] [datetime] NOT NULL,
  CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED 
@@ -15,13 +10,13 @@ CREATE TABLE [dbo].[Clients](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Consoles]    Script Date: 30/12/2023 02:13:26 ******/
+/****** Object:  Table [dbo].[Consoles]    Script Date: 30/12/2023 05:12:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Consoles](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](100) NOT NULL,
  CONSTRAINT [PK_Consoles] PRIMARY KEY CLUSTERED 
 (
@@ -29,13 +24,13 @@ CREATE TABLE [dbo].[Consoles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Games]    Script Date: 30/12/2023 02:13:26 ******/
+/****** Object:  Table [dbo].[Games]    Script Date: 30/12/2023 05:12:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Games](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Nombre] [varchar](100) NOT NULL,
 	[ConsoleId] [int] NOT NULL,
  CONSTRAINT [PK_Games] PRIMARY KEY CLUSTERED 
@@ -44,13 +39,13 @@ CREATE TABLE [dbo].[Games](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Rents]    Script Date: 30/12/2023 02:13:26 ******/
+/****** Object:  Table [dbo].[Rents]    Script Date: 30/12/2023 05:12:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Rents](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ClientId] [int] NOT NULL,
 	[GameId] [int] NOT NULL,
 	[UserId] [int] NOT NULL,
@@ -62,13 +57,13 @@ CREATE TABLE [dbo].[Rents](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 30/12/2023 02:13:26 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 30/12/2023 05:12:25 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Users](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Username] [varchar](50) NOT NULL,
 	[Pass] [varchar](30) NOT NULL,
 	[IsAdmin] [bit] NOT NULL,
@@ -77,6 +72,12 @@ CREATE TABLE [dbo].[Users](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[Users] ON 
+GO
+INSERT [dbo].[Users] ([Id], [Username], [Pass], [IsAdmin]) VALUES (1, N'Totti', N'123', 1)
+GO
+SET IDENTITY_INSERT [dbo].[Users] OFF
 GO
 ALTER TABLE [dbo].[Games]  WITH CHECK ADD  CONSTRAINT [FK_Games_Consoles] FOREIGN KEY([ConsoleId])
 REFERENCES [dbo].[Consoles] ([Id])
@@ -100,5 +101,5 @@ ALTER TABLE [dbo].[Rents] CHECK CONSTRAINT [FK_Rents_Users]
 GO
 USE [master]
 GO
-ALTER DATABASE [TPIntegrador] SET  READ_WRITE 
+ALTER DATABASE [Videoclub] SET  READ_WRITE 
 GO
