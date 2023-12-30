@@ -15,5 +15,6 @@ namespace Base.Base
         {
             UsuarioLogueado = usuarioLogueado;
         }
+        public FrmBase() { }
     }
 }

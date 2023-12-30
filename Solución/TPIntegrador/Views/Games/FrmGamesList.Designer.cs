@@ -1,6 +1,6 @@
 ﻿namespace TPIntegrador.Views
 {
-    partial class FrmGames
+    partial class FrmGamesList
     {
         /// <summary>
         /// Required designer variable.

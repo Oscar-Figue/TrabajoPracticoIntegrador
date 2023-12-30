@@ -14,9 +14,14 @@ namespace Repository.Entities
         public int GameId { get; set; }
         public GameModel Game { set; get; }
         public int UserId { get; set; }
-        public UserModel Usuario { set; get; }
+        public UserModel User { set; get; }
         public DateTime Fecha { get; set; }
         public DateTime? FechaDevolucion { get; set; }
+
+        public string RentString
+        {
+            get { return $"#{Id}-{Fecha.ToString("dd-MM-yyyy")}-Cliente#{Client.Id} {Client.NombreCompleto} - Juego: {Game.Nombre} - Recepcionista:{User.Username}"; }
+        }
     }
 
 }

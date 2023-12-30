@@ -14,7 +14,7 @@ namespace Repository.Entities
         public int GameId { get; set; }
         public Game Game { set; get; }
         public int UserId { get; set; }
-        public User Usuario { set; get; }
+        public User User { set; get; }
         public DateTime Fecha { get; set; }
         public DateTime? FechaDevolucion { get; set; }
     }

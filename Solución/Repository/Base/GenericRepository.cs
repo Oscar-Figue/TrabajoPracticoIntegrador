@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using Base.Helpers;
 using Console = Repository.Entities.Console;
+using System.Linq;
+using System.Reflection;
 
 namespace Repository.Base
 {
@@ -15,6 +17,23 @@ namespace Repository.Base
             string tableName = GetTableName();
             string query = $"SELECT * FROM {tableName}";
             List<T> entities = new List<T>();
+
+            // Aquí podrías tener lógica para obtener información sobre las asociaciones de la entidad
+            // Por ejemplo, supongamos que hay una lista de propiedades asociadas en la clase de entidad
+            var associatedProperties = typeof(T).GetProperties().Where(prop => !IsSimpleType(prop.PropertyType));
+
+            // Si hay propiedades asociadas, modifica la consulta para incluir las tablas asociadas mediante joins
+            if (associatedProperties.Any())
+            {
+                // Construir los joins para las tablas asociadas en la consulta SQL
+                foreach (var prop in associatedProperties)
+                {
+                    // Asumiendo que la propiedad tiene un atributo que indica el nombre de la tabla asociada
+                    // Puedes personalizar esta lógica según tu implementación
+                    string associatedTableName = GetAssociatedTableName(prop); // Obtener el nombre de la tabla asociada
+                    query += $" LEFT JOIN {associatedTableName} ON {tableName}.{prop.Name}Id = {associatedTableName}.Id";
+                }
+            }
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -31,6 +50,7 @@ namespace Repository.Base
             }
             return entities;
         }
+
 
         public T GetById(int id)
         {
@@ -118,6 +138,10 @@ namespace Repository.Base
         {
             return typeof(T).Name + "s"; // Asumiendo que el nombre de la tabla en la base de datos es el nombre de la clase en plural.
         }
+        private string GetAssociatedTableName(PropertyInfo prop)
+        {
+            return prop.Name + "s"; // Asumiendo que el nombre de la tabla en la base de datos es el nombre de la clase en plural.
+        }
         private string GenerateInsertQuery(string tableName)
         {
             if (typeof(T) == typeof(Client))
@@ -147,7 +171,6 @@ namespace Repository.Base
 
             throw new NotSupportedException($"Entity type {typeof(T)} not supported.");
         }
-
         internal T MapFromReader(SqlDataReader reader)
         {
             var entityType = typeof(T);
@@ -157,53 +180,86 @@ namespace Repository.Base
 
             foreach (var property in properties)
             {
+                if (IsSimpleType(property.PropertyType)) // Si es un tipo simple
+                {
+                    if (reader[property.Name] != DBNull.Value)
+                    {
+                        if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?)) // Si es un tipo DateTime
+                        {
+                            property.SetValue(entity, reader.GetDateTime(reader.GetOrdinal(property.Name)));
+                        }
+                        else // Otros tipos simples
+                        {
+                            property.SetValue(entity, Convert.ChangeType(reader[property.Name], property.PropertyType));
+                        }
+                    }
+                }
+                else // Si es una entidad asociada
+                {
+                    var associatedEntity = GetAssociatedEntity(property.PropertyType, reader);
+                    property.SetValue(entity, associatedEntity);
+                }
+            }
+            return (T)entity;
+        }
+        private object GetAssociatedEntity(Type entityType, SqlDataReader reader)
+        {
+            var entity = Activator.CreateInstance(entityType);
+
+            var properties = entityType.GetProperties();
+
+            foreach (var property in properties)
+            {
+                if (IsSimpleType(property.PropertyType)) // Si es un tipo simple
+                {
+                    if (reader[property.Name] != DBNull.Value)
+                    {
+                        if (property.PropertyType == typeof(DateTime) || property.PropertyType == typeof(DateTime?)) // Si es un tipo DateTime
+                        {
+                            property.SetValue(entity, reader.GetDateTime(reader.GetOrdinal(property.Name)));
+                        }
+                        else // Otros tipos simples
+                        {
+                            property.SetValue(entity, Convert.ChangeType(reader[property.Name], property.PropertyType));
+                        }
+                    }
+                }
+                // Puedes agregar más lógica para otros tipos complejos si es necesario
+            }
+
+            return entity;
+        }
+
+        private bool IsSimpleType(Type type)
+        {
+            return type.IsPrimitive || new[] { typeof(string), typeof(decimal), typeof(DateTime), typeof(Guid) }.Contains(type) || type.IsValueType;
+        }
+
+        private object MapAssociatedEntity(Type entityType, SqlDataReader reader)
+        {
+            var associatedEntity = Activator.CreateInstance(entityType);
+
+            var properties = entityType.GetProperties();
+
+            foreach (var property in properties)
+            {
                 if (reader[property.Name] != DBNull.Value)
                 {
-                    if (property.PropertyType == typeof(int))
+                    if (IsSimpleType(property.PropertyType)) // Si es un tipo simple
                     {
-                        property.SetValue(entity, Convert.ToInt32(reader[property.Name]));
-                    }
-                    else if (property.PropertyType == typeof(string))
-                    {
-                        property.SetValue(entity, Convert.ToString(reader[property.Name]));
-                    }
-                    else if (property.PropertyType == typeof(DateTime))
-                    {
-                        property.SetValue(entity, Convert.ToDateTime(reader[property.Name]));
-                    }
-                    // Puedes agregar más tipos según sea necesario
-
-                    // Lógica adicional para obtener entidades asociadas (si corresponde)
-                    // Esto es solo un ejemplo para Game.ConsoleId y Game.Console, ajusta según tu modelo
-                    else if (property.Name == "ConsoleId" && entityType == typeof(Game))
-                    {
-                        var consoleType = typeof(Console);
-                        var console = Activator.CreateInstance(consoleType);
-
-                        var consoleProperties = consoleType.GetProperties();
-
-                        foreach (var consoleProperty in consoleProperties)
+                        if (property.PropertyType == typeof(DateTime)) // Si es un tipo DateTime
                         {
-                            if (reader[consoleProperty.Name] != DBNull.Value)
-                            {
-                                if (consoleProperty.PropertyType == typeof(int))
-                                {
-                                    consoleProperty.SetValue(console, Convert.ToInt32(reader[consoleProperty.Name]));
-                                }
-                                else if (consoleProperty.PropertyType == typeof(string))
-                                {
-                                    consoleProperty.SetValue(console, Convert.ToString(reader[consoleProperty.Name]));
-                                }
-                                // Puedes agregar más tipos según sea necesario
-                            }
+                            property.SetValue(associatedEntity, reader.GetDateTime(reader.GetOrdinal(property.Name)));
                         }
-
-                        property.SetValue(entity, console);
+                        else // Otros tipos simples
+                        {
+                            property.SetValue(associatedEntity, Convert.ChangeType(reader[property.Name], property.PropertyType));
+                        }
                     }
                 }
             }
 
-            return (T)entity;
+            return associatedEntity;
         }
 
     }

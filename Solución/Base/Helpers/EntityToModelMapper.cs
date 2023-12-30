@@ -28,20 +28,18 @@ namespace Base.Helpers
         }
 
         public TModel MapToModel<TEntity, TModel>(TEntity entity)
-            where TEntity : class
-            where TModel : class, new()
+    where TEntity : class
+    where TModel : class, new()
         {
             if (entity == null)
             {
                 return null;
             }
 
-            var entityType = typeof(TEntity);
-            var modelType = typeof(TModel);
             var model = new TModel();
 
-            var entityProperties = entityType.GetProperties();
-            var modelProperties = modelType.GetProperties()
+            var entityProperties = typeof(TEntity).GetProperties();
+            var modelProperties = typeof(TModel).GetProperties()
                 .Where(p => p.CanWrite);
 
             foreach (var modelProperty in modelProperties)
@@ -50,11 +48,31 @@ namespace Base.Helpers
                 if (entityProperty != null)
                 {
                     var value = entityProperty.GetValue(entity);
-                    modelProperty.SetValue(model, value);
+                    if (value != null && !IsSimpleType(entityProperty.PropertyType))
+                    {
+                        var entityType = value.GetType();
+                        var modelType = modelProperty.PropertyType;
+
+                        var mapMethod = typeof(EntityToModelMapper).GetMethod("MapToModel");
+                        var genericMethod = mapMethod.MakeGenericMethod(entityType, modelType);
+                        var nestedModel = genericMethod.Invoke(this, new[] { value });
+
+                        modelProperty.SetValue(model, nestedModel);
+                    }
+                    else
+                    {
+                        modelProperty.SetValue(model, value);
+                    }
                 }
             }
 
             return model;
         }
+
+        private bool IsSimpleType(Type type)
+        {
+            return type.IsPrimitive || new[] { typeof(string), typeof(decimal), typeof(DateTime), typeof(Guid) }.Contains(type) || type.IsValueType;
+        }
     }
+
 }

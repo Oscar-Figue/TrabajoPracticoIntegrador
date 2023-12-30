@@ -59,6 +59,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(100, 20);
             this.txtUsername.TabIndex = 2;
+            this.txtUsername.Text = "Totti";
             // 
             // txtPass
             // 
@@ -66,6 +67,7 @@
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(100, 20);
             this.txtPass.TabIndex = 3;
+            this.txtPass.Text = "123";
             // 
             // btnLogin
             // 
