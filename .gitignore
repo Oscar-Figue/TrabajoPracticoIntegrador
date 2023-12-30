@@ -398,3 +398,7 @@ FodyWeavers.xsd
 *.sln.iml
 
 *.suo
+*.cache
+Solución/TPIntegrador/.vs/TPIntegrador/v17/.suo
+*.exe
+*.pdb

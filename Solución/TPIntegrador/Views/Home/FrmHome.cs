@@ -31,6 +31,7 @@ namespace TPIntegrador.Views.Home
 
         private void RefreshHome(string filter = "")
         {
+            RefreshAdministrationView();
             var list = _rentService.GetAll();
             if (!string.IsNullOrEmpty(filter))
                 list = list.Where(x => x.RentString.ToLower().Contains(filter.ToLower())).ToList();
@@ -114,6 +115,10 @@ namespace TPIntegrador.Views.Home
         private void RefreshEndRentBtnEnabled()
         {
             btnEndRent.Enabled = lstRents.SelectedItem == null || !((RentModel)lstRents.SelectedItem).FechaDevolucion.HasValue;
+        }
+        private void RefreshAdministrationView()
+        {
+            btnConsoles.Visible = btnGames.Visible = btnUsers.Visible = _loggedUser.IsAdmin;
         }
     }
 }
