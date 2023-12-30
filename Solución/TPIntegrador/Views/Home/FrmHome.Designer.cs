@@ -48,6 +48,7 @@
             this.lstRents.Name = "lstRents";
             this.lstRents.Size = new System.Drawing.Size(812, 472);
             this.lstRents.TabIndex = 0;
+            this.lstRents.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lstRents_DrawItem);
             this.lstRents.SelectedIndexChanged += new System.EventHandler(this.lstRents_SelectedIndexChanged);
             // 
             // txtSearcher

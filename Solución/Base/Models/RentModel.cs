@@ -17,7 +17,14 @@ namespace Repository.Entities
         public UserModel User { set; get; }
         public DateTime Fecha { get; set; }
         public DateTime? FechaDevolucion { get; set; }
-
+        public RentModel() { }
+        public RentModel(int userId, int gameId, int clientId)
+        {
+            ClientId = clientId;
+            GameId = gameId;
+            UserId = userId;
+            Fecha = DateTime.Now;
+        }
         public string RentString
         {
             get { return $"#{Id}-{Fecha.ToString("dd-MM-yyyy")}-Cliente#{Client.Id} {Client.NombreCompleto} - Juego: {Game.Nombre} - Recepcionista:{User.Username}"; }

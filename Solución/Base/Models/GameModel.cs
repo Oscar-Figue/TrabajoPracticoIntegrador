@@ -1,9 +1,4 @@
 ﻿using Base.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository.Entities
 {
@@ -13,5 +8,10 @@ namespace Repository.Entities
         public string Nombre { get; set; }
         public int ConsoleId { get; set; }
         public ConsoleModel Console { get; set; }
+
+        public string GameString
+        {
+            get { return $"#{Id}| [{Console.Nombre}] - {Nombre}"; }
+        }
     }
 }

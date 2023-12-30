@@ -109,7 +109,8 @@ namespace Repository.Base
         private void MapParameters(SqlCommand command, T entity)
         {
             var entityType = typeof(T);
-            var properties = entityType.GetProperties();
+            var properties = entityType.GetProperties().Where(p => !p.PropertyType.IsClass || p.PropertyType == typeof(string) || p.PropertyType == typeof(DateTime) || p.PropertyType == typeof(DateTime?)) // Filtrar propiedades que no son clases
+        .ToList();
 
             foreach (var property in properties)
             {
@@ -144,18 +145,27 @@ namespace Repository.Base
         }
         private string GenerateInsertQuery(string tableName)
         {
-            if (typeof(T) == typeof(Client))
-            {
-                return $"INSERT INTO {tableName} (NombreCompleto, FechaNacimiento) VALUES (@NombreCompleto, @FechaNacimiento)";
-            }
-            else if (typeof(T) == typeof(Console))
-            {
-                return $"INSERT INTO {tableName} (Nombre) VALUES (@Nombre)";
-            }
-            // Implementar para otras clases como Game, Rent, User...
+            var properties = typeof(T).GetProperties()
+                .Where(p => !p.PropertyType.IsClass || p.PropertyType == typeof(string) || p.PropertyType == typeof(DateTime)) // Filtrar propiedades que no son clases
+                .Select(p => p.Name != "User" ? p.Name : "[User]") // Encerrar 'User' entre corchetes
+                .Where(p => p != "Id") // Excluir la columna de identidad 'Id'
+                .ToList();
 
-            throw new NotSupportedException($"Entity type {typeof(T)} not supported.");
+            var columnNames = string.Join(", ", properties);
+            var parameterNames = string.Join(", ", properties.Select(p => "@" + p));
+
+            // Si la entidad tiene una propiedad "User", la sustituimos por "UserId" en la consulta
+            if (properties.Any(p => p == "[User]"))
+            {
+                columnNames += ", UserId";
+                parameterNames += ", @UserId";
+            }
+
+            return $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames})";
         }
+
+
+
 
         private string GenerateUpdateQuery(string tableName, string idColumnName)
         {

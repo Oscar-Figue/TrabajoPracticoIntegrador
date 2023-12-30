@@ -11,6 +11,10 @@ namespace Repository.Entities
         public int Id { get; set; }
         public string NombreCompleto { get; set; }
         public DateTime FechaNacimiento { get; set; }
-    }
 
+        public string ClientString
+        {
+            get { return $"#{Id}|{NombreCompleto}"; }
+        }
+    }
 }
