@@ -34,6 +34,9 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,8 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\FrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Helpers\ConfigurationHelper.cs" />
     <Compile Include="Helpers\EntityToModelMapper.cs" />
+    <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ConsoleModel.cs" />
     <Compile Include="Models\GameModel.cs" />

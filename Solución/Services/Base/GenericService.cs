@@ -1,5 +1,6 @@
 ﻿using Base.Helpers;
 using Repository.Base;
+using Repository.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Services.Base
     where TModel : class, new()
     where TEntity : class, new()
     {
-        private readonly GenericRepository<TEntity> repository;
-        private readonly EntityToModelMapper mapper;
+        internal readonly GenericRepository<TEntity> repository;
+        internal readonly EntityToModelMapper mapper;
 
         public GenericService()
         {
@@ -49,6 +50,7 @@ namespace Services.Base
         {
             repository.Delete(id);
         }
+
     }
 
 }

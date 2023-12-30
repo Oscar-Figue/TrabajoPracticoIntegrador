@@ -65,7 +65,7 @@ GO
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Username] [varchar](50) NOT NULL,
-	[Pass] [varchar](30) NOT NULL,
+	[Pass] [varchar](50) NOT NULL,
 	[IsAdmin] [bit] NOT NULL,
  CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
 (
@@ -98,8 +98,4 @@ ALTER TABLE [dbo].[Rents]  WITH CHECK ADD  CONSTRAINT [FK_Rents_Users] FOREIGN K
 REFERENCES [dbo].[Users] ([Id])
 GO
 ALTER TABLE [dbo].[Rents] CHECK CONSTRAINT [FK_Rents_Users]
-GO
-USE [master]
-GO
-ALTER DATABASE [Videoclub] SET  READ_WRITE 
 GO
