@@ -25,7 +25,7 @@ namespace TPIntegrador
             InitializeComponent();
         }
 
-        private async void btnLogin_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace TPIntegrador
 
                 if (string.IsNullOrEmpty(username) && string.IsNullOrEmpty(pass))
                 {
-                    await MessageHelper.MostrarErrorAsync("Ocurrió un error al iniciar sesión");
+                    MessageHelper.ShowError("Ocurrió un error al iniciar sesión");
                     return;
                 }
                 var result = _service.Login(username, pass);
@@ -47,12 +47,12 @@ namespace TPIntegrador
                 }
                 else
                 {
-                    await MessageHelper.MostrarErrorAsync("Ocurrió un error al iniciar sesión");
+                    MessageHelper.ShowError("Ocurrió un error al iniciar sesión");
                 }
             }
             catch (Exception ex)
             {
-                await MessageHelper.MostrarErrorAsync(ex.Message);
+                MessageHelper.ShowError(ex.Message);
             }
 
         }
