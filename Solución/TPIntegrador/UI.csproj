@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\Consoles\FrmConsoleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Consoles\FrmConsoleForm.Designer.cs">
+      <DependentUpon>FrmConsoleForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\FrmHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,12 @@
     <Compile Include="Views\Users\FrmUsersList.Designer.cs">
       <DependentUpon>FrmUsersList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Consoles\FrmConsoleForm.resx">
+      <DependentUpon>FrmConsoleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Consoles\FrmConsolesList.resx">
+      <DependentUpon>FrmConsolesList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
     </EmbeddedResource>
