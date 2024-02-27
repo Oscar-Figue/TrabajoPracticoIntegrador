@@ -13,3 +13,12 @@ D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Repository\obj\Debu
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Repository\bin\Debug\Base.dll
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Repository\bin\Debug\Base.pdb
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Repository\obj\Debug\Repository.csproj.CopyComplete
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\bin\Debug\Repository.dll
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\bin\Debug\Repository.pdb
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\bin\Debug\Base.dll
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\bin\Debug\Base.pdb
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\obj\Debug\Repository.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\obj\Debug\Repository.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\obj\Debug\Repository.csproj.CopyComplete
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\obj\Debug\Repository.dll
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Repository\obj\Debug\Repository.pdb

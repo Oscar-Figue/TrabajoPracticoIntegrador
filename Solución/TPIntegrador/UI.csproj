@@ -52,6 +52,12 @@
     <Compile Include="Views\Consoles\FrmConsoleForm.Designer.cs">
       <DependentUpon>FrmConsoleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Games\FrmGamesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Games\FrmGamesForm.Designer.cs">
+      <DependentUpon>FrmGamesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Home\FrmHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Consoles\FrmConsolesList.resx">
       <DependentUpon>FrmConsolesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Games\FrmGamesForm.resx">
+      <DependentUpon>FrmGamesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
