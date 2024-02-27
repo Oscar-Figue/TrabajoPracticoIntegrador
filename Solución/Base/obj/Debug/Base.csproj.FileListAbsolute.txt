@@ -1,6 +1,0 @@
-D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\bin\Debug\Base.dll
-D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\bin\Debug\Base.pdb
-D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.csproj.AssemblyReference.cache
-D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.csproj.CoreCompileInputs.cache
-D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.dll
-D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.pdb
