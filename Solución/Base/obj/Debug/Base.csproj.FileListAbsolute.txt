@@ -4,3 +4,9 @@ D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.csproj.CoreCompileInputs.cache
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.dll
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.pdb
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Base\bin\Debug\Base.dll
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Base\bin\Debug\Base.pdb
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.dll
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\Base\obj\Debug\Base.pdb
