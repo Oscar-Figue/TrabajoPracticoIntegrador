@@ -54,3 +54,4 @@ D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\TPIntegrador\obj\De
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\TPIntegrador\obj\Debug\UI.csproj.CopyComplete
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\TPIntegrador\obj\Debug\TPIntegrador.exe
 D:\Dev\TrabajoIntegrador\TrabajoPracticoIntegrador\Solución\TPIntegrador\obj\Debug\TPIntegrador.pdb
+C:\Users\Usuario\Documents\GitHub\TrabajoPracticoIntegrador\Solución\TPIntegrador\obj\Debug\TPIntegrador.Views.FrmGamesList.resources

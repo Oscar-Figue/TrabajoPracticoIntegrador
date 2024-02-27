@@ -117,6 +117,9 @@
     <EmbeddedResource Include="Views\Games\FrmGamesForm.resx">
       <DependentUpon>FrmGamesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Games\FrmGamesList.resx">
+      <DependentUpon>FrmGamesList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Home\FrmHome.resx">
       <DependentUpon>FrmHome.cs</DependentUpon>
     </EmbeddedResource>
