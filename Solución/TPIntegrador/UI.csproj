@@ -102,6 +102,12 @@
     <Compile Include="Views\Users\FrmUsersList.Designer.cs">
       <DependentUpon>FrmUsersList.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Clients\FrmClientsForm.resx">
+      <DependentUpon>FrmClientsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Clients\FrmClientsList.resx">
+      <DependentUpon>FrmClientsList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Consoles\FrmConsoleForm.resx">
       <DependentUpon>FrmConsoleForm.cs</DependentUpon>
     </EmbeddedResource>
