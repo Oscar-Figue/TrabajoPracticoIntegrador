@@ -410,3 +410,9 @@ Solución/TPIntegrador/.vs/TPIntegrador/v17/.suo
 *.vsidx
 *.cache
 *.cache
+*.dll
+*.pdb
+*.cache
+*.pdb
+Solución/TPIntegrador/.vs/TPIntegrador/v17/.suo
+*.cache
